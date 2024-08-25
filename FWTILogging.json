@@ -1,0 +1,84 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Network/azureFirewalls",
+      "apiVersion": "2020-11-01",
+      "name": "myAzureFirewall",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "sku": {
+          "tier": "Standard"
+        },
+        "threatIntelMode": "Alert",
+        "ipConfigurations": [
+          {
+            "name": "FW-ipconfig",
+            "properties": {
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'myVnet', 'AzureFirewallSubnet')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'myFirewallPublicIP')]"
+              }
+            }
+          }
+        ],
+        "applicationRuleCollections": [
+          {
+            "name": "AppRuleCollection",
+            "properties": {
+              "priority": 100,
+              "action": "Deny",
+              "rules": [
+                {
+                  "name": "DenyAll",
+                  "sourceAddresses": ["*"],
+                  "protocols": [
+                    {
+                      "protocolType": "Https",
+                      "port": 443
+                    }
+                  ],
+                  "targetFqdns": ["*"]
+                }
+              ]
+            }
+          }
+        ],
+        "networkRuleCollections": [
+          {
+            "name": "NetRuleCollection",
+            "properties": {
+              "priority": 200,
+              "action": "Allow",
+              "rules": [
+                {
+                  "name": "AllowOutbound",
+                  "sourceAddresses": ["10.0.0.0/16"],
+                  "destinationAddresses": ["*"],
+                  "destinationPorts": ["80", "443"],
+                  "protocols": ["TCP"]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2020-11-01",
+      "name": "myFirewallPublicIP",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4
+      }
+    }
+  ]
+}
