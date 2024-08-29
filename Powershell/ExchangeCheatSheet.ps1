@@ -202,4 +202,3 @@ Set-Mailbox -Identity <Mailbox> -LinkedMasterAccount <MasterAccount> -LinkedDoma
 # 16. Convert a linked mailbox to a regular mailbox
 Set-Mailbox -Identity <Mailbox> -LinkedMasterAccount $null -LinkedDomainController $null
 
-# 17. Convert a
