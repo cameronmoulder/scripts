@@ -1,2 +1,5 @@
+Welcome to my repo!
 
-If you need assistance please reach me at cameron@mouldertech.com
+The files here are meant to be used as building blocks for actual solutions.
+
+If any issues or queries please feel free to reach me at cameronmoulder@gmail.com
