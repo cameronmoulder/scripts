@@ -19,8 +19,10 @@ if ($deployordestroy -eq "deploy") {
         az resource list --resource-group CoreRG
 }
 elseif ($deployordestroy -eq "destroy") {
+
+    $RGname = (Read-Host = "Name of resource group to be destroyed.")
     
-    az group delete --name CoreRG --yes
+    az group delete --name $RGname --yes
 }
 else {
     Write-Host "Invalid command. Please enter 'deploy' or 'destroy'."
