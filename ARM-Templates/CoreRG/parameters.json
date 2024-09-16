@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworks_eurvnet_name": {
+            "value": null
+        },
+        "virtualNetworks_eusvnet_name": {
+            "value": null
+        },
+        "virtualNetworks_wusvnet_name": {
+            "value": null
+        },
+        "networkSecurityGroups_eurnsg_name": {
+            "value": null
+        },
+        "networkSecurityGroups_eusnsg_name": {
+            "value": null
+        },
+        "networkSecurityGroups_wusnsg_name": {
+            "value": null
+        }
+    }
+}
