@@ -1,7 +1,7 @@
 # Define paths
 $msiPath = <PATH>
 $configFileSource = <PATH>
-$configFileDestination = <PATH # Adjust as needed
+$configFileDestination = <PATH> # Adjust as needed
 
 # Install the MSI
 Start-Process msiexec.exe -ArgumentList "/i `"$msiPath`" /quiet /norestart" -Wait
